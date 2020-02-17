@@ -81,7 +81,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     SmartDashboard.putBoolean(  "IMU_Connected",        navX.isConnected());
     SmartDashboard.putBoolean(  "IMU_IsCalibrating",    navX.isCalibrating());
-    SmartDashboard.putNumber(   "IMU_Yaw",              navX.getYaw());
+    //SmartDashboard.putNumber(   "IMU_Yaw",              navX.getYaw());
     SmartDashboard.putNumber(   "IMU_Pitch",            navX.getPitch());
     SmartDashboard.putNumber(   "IMU_Roll",             navX.getRoll());
 

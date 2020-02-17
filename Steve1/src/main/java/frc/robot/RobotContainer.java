@@ -46,10 +46,10 @@ XboxController m_driverController = new XboxController(OIConstants.kDriverContro
     // Configure the button bindings
     configureButtonBindings();
 
-    m_driveSubsystem.setDefaultCommand(
-      new DriveCommand(m_driveSubsystem,
-      () -> m_driverController.getY(GenericHID.Hand.kLeft),
-      () -> m_driverController.getX(GenericHID.Hand.kRight)));
+    //m_driveSubsystem.setDefaultCommand(
+     // new DriveCommand(m_driveSubsystem,
+      //() -> m_driverController.getY(GenericHID.Hand.kLeft),
+      //() -> m_driverController.getX(GenericHID.Hand.kRight)));
   }
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
