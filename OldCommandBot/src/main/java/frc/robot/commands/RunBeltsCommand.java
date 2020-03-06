@@ -7,31 +7,26 @@
 
 package frc.robot.commands;
 
-
-
-import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class AutoAimCommand extends Command {
-  public AutoAimCommand() {
+import edu.wpi.first.wpilibj.command.Command;
+
+public class RunBeltsCommand extends Command {
+  public RunBeltsCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_driveSubsystem);
+    requires(Robot.m_magSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_driveSubsystem.LimelightOn();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    Robot.m_driveSubsystem.LimelightOn();
-
-    Robot.m_driveSubsystem.AutoAim();
+    Robot.m_magSubsystem.sendIt();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -43,13 +38,13 @@ public class AutoAimCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_driveSubsystem.LimelightOff();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.m_driveSubsystem.LimelightOff();
+
+    Robot.m_magSubsystem.stopBelts();
   }
 }

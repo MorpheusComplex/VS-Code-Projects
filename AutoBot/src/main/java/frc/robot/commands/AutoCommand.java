@@ -7,13 +7,12 @@
 
 package frc.robot.commands;
 
-
-
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class AutoAimCommand extends Command {
-  public AutoAimCommand() {
+public class AutoCommand extends Command {
+  public AutoCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_driveSubsystem);
@@ -22,16 +21,18 @@ public class AutoAimCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_driveSubsystem.LimelightOn();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    Robot.m_driveSubsystem.LimelightOn();
-
-    Robot.m_driveSubsystem.AutoAim();
+    double distanceinfeet = 3.5;
+    while (Robot.m_driveSubsystem.GetAverageDistance() < distanceinfeet){
+      Robot.m_driveSubsystem.Drive(0.5, 0);
+      SmartDashboard.putNumber("Distance Driven", Robot.m_driveSubsystem.GetAverageDistance());
+      SmartDashboard.putNumber("Distance to go", distanceinfeet);
+      }
+      Robot.m_driveSubsystem.Drive(0,0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -43,13 +44,11 @@ public class AutoAimCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_driveSubsystem.LimelightOff();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.m_driveSubsystem.LimelightOff();
   }
 }

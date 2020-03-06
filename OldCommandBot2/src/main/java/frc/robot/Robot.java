@@ -14,9 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.MagSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.commands.DriveForwardAutoCommand;
 
 /**
@@ -28,9 +25,6 @@ import frc.robot.commands.DriveForwardAutoCommand;
  */
 public class Robot extends TimedRobot {
   public static DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  public static IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  public static MagSubsystem m_magSubsystem = new MagSubsystem();
-  public static ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   public static OI m_oi;
 
   Command m_autonomousCommand;

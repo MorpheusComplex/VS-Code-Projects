@@ -35,5 +35,9 @@ public class HatchSubsystem extends SubsystemBase {
    */
   public void releaseHatch() {
     m_hatchSolenoid.set(kReverse);
+
+    if(m_stick.g)  m_shifter.set(kForward);
   }
+
+
 }

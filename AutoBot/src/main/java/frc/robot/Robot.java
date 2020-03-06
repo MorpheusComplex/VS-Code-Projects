@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.DriveCommand;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.MagSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.commands.DriveForwardAutoCommand;
+import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.commands.AutoCommand;
+import frc.robot.commands.DriveCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,10 +27,9 @@ import frc.robot.commands.DriveForwardAutoCommand;
  * project.
  */
 public class Robot extends TimedRobot {
+  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  public static IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  public static MagSubsystem m_magSubsystem = new MagSubsystem();
-  public static ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  public static ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -43,9 +42,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new DriveForwardAutoCommand());
+    m_chooser.setDefaultOption("Default Auto", new AutoCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
-    
     SmartDashboard.putData("Auto mode", m_chooser);
   }
 
@@ -59,6 +57,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Encoder Value", Robot.m_climbSubsystem.m_liftMotor.getSelectedSensorPosition());
   }
 
   /**
@@ -128,29 +127,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    
-    SmartDashboard.putNumber("Motor 14 Temp", m_driveSubsystem.m_f_rightMotor.getMotorTemperature());
-    SmartDashboard.putNumber("Motor 13 Temp", m_driveSubsystem.m_l_rightMotor.getMotorTemperature());
-    SmartDashboard.putNumber("Motor 12 Temp", m_driveSubsystem.m_f_leftMotor.getMotorTemperature());
-    SmartDashboard.putNumber("Motor 11 Temp", m_driveSubsystem.m_l_leftMotor.getMotorTemperature());
-
-      //putting driver station info to Dashboard
-      SmartDashboard.putString( "Driver Station",     m_driveSubsystem.dstation.toString());
-      SmartDashboard.putString( "Alliance",           m_driveSubsystem.dstation.getAlliance().toString());
-      SmartDashboard.putNumber( "Match Number",       m_driveSubsystem.dstation.getMatchNumber());
-      SmartDashboard.putNumber( "Match Time",         m_driveSubsystem.dstation.getMatchTime());
-      SmartDashboard.putString( "Control Wheel Color",         m_driveSubsystem.dstation.getGameSpecificMessage());
-
-      //Sending Gyro Info to Dashbaord
-      SmartDashboard.putBoolean(  "IMU_Connected",        m_driveSubsystem.navX.isConnected());
-      SmartDashboard.putBoolean(  "IMU_IsCalibrating",    m_driveSubsystem.navX.isCalibrating());
-      SmartDashboard.putNumber(   "IMU_Yaw",              m_driveSubsystem.navX.getYaw());
-      SmartDashboard.putNumber(   "IMU_Pitch",            m_driveSubsystem.navX.getPitch());
-      SmartDashboard.putNumber(   "IMU_Roll",             m_driveSubsystem.navX.getRoll());
-
-      SmartDashboard.putString( "Driver Station",     m_driveSubsystem.m_shifters.get().toString());
-    
-
   }
 
   /**

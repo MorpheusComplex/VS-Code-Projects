@@ -38,8 +38,8 @@ public class RobotMap {
         public static int rightFollowMotor_ID = 14;
 
         public static int pcm_ID = 20;
-          public static int shifter_ID0 = 2;
-          public static int shifter_ID1 = 3;
+          public static int shifter_ID0 = 0;
+          public static int shifter_ID1 = 1;
       
 
     
@@ -75,14 +75,4 @@ public class RobotMap {
   
 
   //
-
-  //Shooter PID
-    public static double shooter_kP = 6e-5; 
-    public static double shooter_kI = 0;
-    public static double shooter_kD = 0; 
-    public static double shooter_kIz = 0; 
-    public static double shooter_kFF = 0.000015; 
-    public static double shooter_kMaxOutput = 1; 
-    public static double shooter_kMinOutput = -1;
-    public static double shooter_maxRPM = 5700;
 }

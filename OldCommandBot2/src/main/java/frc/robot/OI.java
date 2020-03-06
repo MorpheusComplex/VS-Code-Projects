@@ -9,15 +9,12 @@ package frc.robot;
 
 import frc.robot.commands.AutoAimCommand;
 import frc.robot.commands.ChangeGearCommand;
-import frc.robot.commands.RunIntakeCommand;
-import frc.robot.commands.RunBeltsCommand;
 import frc.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 
 /**
@@ -37,8 +34,6 @@ public class OI {
   Joystick m_buttons = new Joystick(RobotMap.driverController_ID);
   public Button aButton = new JoystickButton(m_buttons, RobotMap.A_Button);
   public Button bButton = new JoystickButton(m_buttons, RobotMap.B_Button);
-  public Button yButton = new JoystickButton(m_buttons, 4);
-  public Button leftBumper = new JoystickButton(m_buttons, 5);
   //public Button xButton = new JoystickButton(m_buttons, RobotMap.X_Button);
   //public Button yButton = new JoystickButton(m_buttons, RobotMap.Y_Button);
   //public Button lBumper = new JoystickButton(m_buttons, RobotMap.L_Bumper);
@@ -54,12 +49,8 @@ public class OI {
 
   public OI(){
   aButton.whenPressed(new ChangeGearCommand());
-  bButton.toggleWhenPressed(new RunIntakeCommand());
-  yButton.whenPressed(new AutoAimCommand());
-  leftBumper.whileHeld(new RunBeltsCommand());
-
-  
-    //// TRIGGERING COMMANDS WITH BUTTONS
+  bButton.whileHeld(new AutoAimCommand());
+  //// TRIGGERING COMMANDS WITH BUTTONS
   // Once you have a button, it's trivial to bind it to a button in one of
   // three ways:
 
@@ -79,11 +70,6 @@ public class OI {
   public XboxController getStick(){
 
     return m_stick;
-  }
-
-  public double getRightTrigger(){
-
-    return m_stick.getTriggerAxis(Hand.kRight);
   }
  
 }

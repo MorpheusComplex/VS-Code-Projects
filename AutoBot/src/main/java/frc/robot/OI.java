@@ -7,18 +7,12 @@
 
 package frc.robot;
 
-import frc.robot.commands.AutoAimCommand;
-import frc.robot.commands.ChangeGearCommand;
-import frc.robot.commands.RunIntakeCommand;
-import frc.robot.commands.RunBeltsCommand;
-import frc.robot.RobotMap;
+import frc.robot.commands.PlaceClawCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -32,34 +26,18 @@ public class OI {
   // number it is.
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
+
   XboxController m_stick = new XboxController(RobotMap.driverController_ID);
 
   Joystick m_buttons = new Joystick(RobotMap.driverController_ID);
   public Button aButton = new JoystickButton(m_buttons, RobotMap.A_Button);
   public Button bButton = new JoystickButton(m_buttons, RobotMap.B_Button);
-  public Button yButton = new JoystickButton(m_buttons, 4);
-  public Button leftBumper = new JoystickButton(m_buttons, 5);
-  //public Button xButton = new JoystickButton(m_buttons, RobotMap.X_Button);
-  //public Button yButton = new JoystickButton(m_buttons, RobotMap.Y_Button);
-  //public Button lBumper = new JoystickButton(m_buttons, RobotMap.L_Bumper);
-  //public Button rBumper = new JoystickButton(m_buttons, RobotMap.R_Bumper);
-  //public Button selectButton = new JoystickButton(m_buttons, RobotMap.Select_Button);
-  //public Button menuButton = new JoystickButton(m_buttons, RobotMap.Menu_Button);
-  //public Button lStickButton = new JoystickButton(m_buttons, RobotMap.L_Stick_Button);
-  //public Button rStickButton = new JoystickButton(m_buttons, RobotMap.R_Stick_Button);
 
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.
 
-  public OI(){
-  aButton.whenPressed(new ChangeGearCommand());
-  bButton.toggleWhenPressed(new RunIntakeCommand());
-  yButton.whenPressed(new AutoAimCommand());
-  leftBumper.whileHeld(new RunBeltsCommand());
-
-  
-    //// TRIGGERING COMMANDS WITH BUTTONS
+  //// TRIGGERING COMMANDS WITH BUTTONS
   // Once you have a button, it's trivial to bind it to a button in one of
   // three ways:
 
@@ -75,17 +53,13 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
+
+  public OI(){
+    aButton.toggleWhenPressed(new PlaceClawCommand());
+    
   }
   public XboxController getStick(){
 
     return m_stick;
   }
-
-  public double getRightTrigger(){
-
-    return m_stick.getTriggerAxis(Hand.kRight);
-  }
- 
 }
-
-
